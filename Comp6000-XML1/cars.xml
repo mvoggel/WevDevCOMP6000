@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cars> 
+	<car cid="car1" team="t1"> 
+		<title>Team car 1</title>
+		<model> Ford F-150</model>
+		<driver> Matthew Voggel</driver>
+	</car>
+	
+	<car cid="car2" team="t2"> 
+		<title> Team car 2</title>
+		<model> Mazda CX5</model>
+		<driver> Allie Voggel</driver>
+	</car>
+	
+	<car cid="car3" team="t3"> 
+		<title> team car 3</title>
+		<model> Jeep Wrangler</model>
+		<driver> Dale Earnheart</driver>
+	</car>
+	
+</cars>
