@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teams> 
+	<team tid="t1" cars="car1"> 
+		<team_title>Team 1</team_title>
+		<description> This is the best team ever </description>
+		<series> F1</series>
+	</team>
+	
+	<team tid="t2" cars="car2"> 
+		<team_title>Team 2</team_title>
+		<description> The up and coming team</description>
+		<series> Indy 500</series>
+	</team>
+	
+	<team tid="t3" cars="car3"> 
+		<team_title> Team 3</team_title>
+		<description> The old team</description>
+		<series> Daytona 500</series>
+	</team>	
+</teams>
