@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-   COMP6000 - XML Assignment2 
+   COMP6000 - XML Assignment2. 
+   Nested setup for our schema data, allows easier (for at least myself) ability to check attributes being mapped 
 
    Map Finds For You schema
    Author:  Matthew Voggel
@@ -17,7 +18,7 @@ CUSTOMER VOCABULARY (checklist)
 	name Y
 	title Y
 	address Y 
-	phone Y (validation for phone # length?) 
+	phone Y (validation for phone # length??) 
 	email Y (needing validation for email??)
 	order Y 
 	orderID Y 
@@ -31,7 +32,6 @@ CUSTOMER VOCABULARY (checklist)
 	itemQty Y 
 
 -->
-
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
    <xs:element name="customers">
@@ -58,9 +58,6 @@ CUSTOMER VOCABULARY (checklist)
                            </xs:simpleContent>
                         </xs:complexType>
                      </xs:element>
-                     <xs:element name="address" type="xs:string" />
-                     <xs:element name="phone" type="xs:string" />
-                     <xs:element name="email" type="xs:string" minOccurs="0" />
                      <xs:element name="orders">
                         <xs:complexType>
                            <xs:sequence>
@@ -78,14 +75,11 @@ CUSTOMER VOCABULARY (checklist)
                                                             <xs:complexType>
                                                                <xs:simpleContent>
                                                                   <xs:extension base="xs:float">
-                                                                     <xs:attribute
-                                                                        name="saleItem"
-                                                                        use="optional">
+                                                                     <xs:attribute name="saleItem" use="optional">
                                                                         <xs:simpleType>
-                                                                           <xs:restriction
-                                                                              base="xs:string">
+                                                                           <xs:restriction base="xs:string">
                                                                               <xs:pattern value="N|Y"></xs:pattern>
-																		<!--Is a restriction pattern case-sensitive??? It is insensitive -->
+																				<!--Is a restriction pattern case-sensitive??? It is insensitive -->
                                                                            </xs:restriction>
                                                                         </xs:simpleType>
                                                                      </xs:attribute>
@@ -95,8 +89,7 @@ CUSTOMER VOCABULARY (checklist)
                                                          </xs:element>
                                                          <xs:element name="itemQty" type="xs:int" />
                                                       </xs:sequence>
-                                                      <xs:attribute type="xs:string"
-                                                         name="itemNumber" use="required" />
+                                                      <xs:attribute type="xs:string" name="itemNumber" use="required" />
                                                    </xs:complexType>
                                                 </xs:element>
                                              </xs:sequence>
@@ -127,6 +120,10 @@ CUSTOMER VOCABULARY (checklist)
                            </xs:sequence>
                         </xs:complexType>
                      </xs:element>
+                     <!--Simple type elements for name phone and email, respectively. -->
+                     <xs:element name="address" type="xs:string" />
+                     <xs:element name="phone" type="xs:string" />
+                     <xs:element name="email" type="xs:string" minOccurs="0" />
                   </xs:sequence>
                   <xs:attribute name="custID" use="required">
                      <xs:simpleType>
