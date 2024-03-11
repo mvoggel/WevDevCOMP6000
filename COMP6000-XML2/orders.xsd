@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   COMP6000 - XML Assignment2 
+
+   Map Finds For You schema
+   Author:  Matthew Voggel
+   Date:   03/10/2024  
+
+   Filename:         orders.xsd
+   Supporting Files: orders.xml
+-->
+<!-- 
+CUSTOMER VOCABULARY (checklist) 
+	customers Y
+	customer Y
+	custID Y
+	name Y
+	title Y
+	address Y 
+	phone Y (validation for phone # length?) 
+	email Y (needing validation for email??)
+	order Y 
+	orderID Y 
+	orderBy Y 
+	orderDate Y 
+	items Y 
+	item Y 
+	itemNumber Y 
+	itemPrice Y 
+	saleItem Y 
+	itemQty Y 
+
+-->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+   <xs:element name="customers">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="customer" maxOccurs="unbounded">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element name="name">
+                        <xs:complexType>
+                           <xs:simpleContent>
+                              <xs:extension base="xs:string">
+                                 <xs:attribute name="title" use="optional">
+                                    <xs:simpleType>
+                                       <xs:restriction base="xs:string">
+                                       <!-- Not sure if you can create a restrictive list like you do with sale item??? -->
+                                          <xs:enumeration value="Mr." />
+                                          <xs:enumeration value="Ms." />
+                                          <xs:enumeration value="Mrs." />
+                                       </xs:restriction>
+                                    </xs:simpleType>
+                                 </xs:attribute>
+                              </xs:extension>
+                           </xs:simpleContent>
+                        </xs:complexType>
+                     </xs:element>
+                     <xs:element name="address" type="xs:string" />
+                     <xs:element name="phone" type="xs:string" />
+                     <xs:element name="email" type="xs:string" minOccurs="0" />
+                     <xs:element name="orders">
+                        <xs:complexType>
+                           <xs:sequence>
+                              <xs:element name="order" minOccurs="0" maxOccurs="unbounded">
+                                 <xs:complexType>
+                                    <xs:sequence>
+                                       <xs:element name="orderDate" type="xs:date" />
+                                       <xs:element name="items">
+                                          <xs:complexType>
+                                             <xs:sequence>
+                                                <xs:element name="item" maxOccurs="unbounded">
+                                                   <xs:complexType>
+                                                      <xs:sequence>
+                                                         <xs:element name="itemPrice">
+                                                            <xs:complexType>
+                                                               <xs:simpleContent>
+                                                                  <xs:extension base="xs:float">
+                                                                     <xs:attribute
+                                                                        name="saleItem"
+                                                                        use="optional">
+                                                                        <xs:simpleType>
+                                                                           <xs:restriction
+                                                                              base="xs:string">
+                                                                              <xs:pattern value="N|Y"></xs:pattern>
+																		<!--Is a restriction pattern case-sensitive??? It is insensitive -->
+                                                                           </xs:restriction>
+                                                                        </xs:simpleType>
+                                                                     </xs:attribute>
+                                                                  </xs:extension>
+                                                               </xs:simpleContent>
+                                                            </xs:complexType>
+                                                         </xs:element>
+                                                         <xs:element name="itemQty" type="xs:int" />
+                                                      </xs:sequence>
+                                                      <xs:attribute type="xs:string"
+                                                         name="itemNumber" use="required" />
+                                                   </xs:complexType>
+                                                </xs:element>
+                                             </xs:sequence>
+                                          </xs:complexType>
+                                       </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="orderID" use="required">
+                                       <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                             <xs:minLength value="6" />
+                                             <xs:pattern value="or[0-9]{4}" />
+                                             <!-- Definition of order ID being "cust201", meaning 7 chars long, 3 od which are numbers as defined.-->
+                                          </xs:restriction>
+                                       </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="orderBy" use="required">
+                                       <xs:simpleType>
+                                          <xs:restriction base="xs:string">
+                                             <xs:minLength value="7" />
+                                             <xs:pattern value="cust[0-9]{3}" />
+                                         <!-- Definition of ordered by ID (AKA customer ID) being "cust201", meaning 7 chars long,
+										 3 of which are numbers as defined.-->
+                                          </xs:restriction>
+                                       </xs:simpleType>
+                                    </xs:attribute>
+                                 </xs:complexType>
+                              </xs:element>
+                           </xs:sequence>
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="custID" use="required">
+                     <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                           <xs:minLength value="7" />
+                           <xs:pattern value="cust[0-9]{3}" />
+                           <!-- Definition of customer ID being "cust201", meaning 7 chars long, 3 od which are numbers as defined.-->
+                        </xs:restriction>
+                     </xs:simpleType>
+                  </xs:attribute>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>
